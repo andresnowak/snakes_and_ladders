@@ -18,7 +18,7 @@ private:
 
     std::queue<Player> players_;
 
-    void play(std::vector<std::shared_ptr<Cell>> board_cells);
+    void play();
     void end(int ending);
 
     std::string getInput();
@@ -35,6 +35,9 @@ private:
     void playerHasWon(bool &won, int &player_number);
 
     void numberOfTurnsExceeded(int &turns);
+
+    void addPlayerToBoard(Player *player, int position);
+    void deletePlayerFromBoard(int position);
 
 public:
     Game();

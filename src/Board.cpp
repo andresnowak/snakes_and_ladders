@@ -25,7 +25,7 @@ std::shared_ptr<Cell> Board::cellToChose(int &position)
 
         return std::shared_ptr<Normal>(new Normal(position));
     }
-    else if (cell == 2 and position < size_ and amount_of_cells["ladder"] < 3)
+    else if (cell == 2 and position < size_ and amount_of_cells["ladder"] < 3 and position > 1)
     {
         std::shared_ptr<Ladder> ladder(new Ladder(position));
 
@@ -84,4 +84,46 @@ std::vector<std::shared_ptr<Cell>> Board::getCells()
 
 std::ostream &operator<<(std::ostream &output, const Board &board)
 {
+    int count = 1;
+
+    for (int position = 0; position < board.size_; position++)
+    {
+        int cell_final_position = board.cells_[position].get()->getPositionCell().second;
+        std::string cell_type = board.cells_[position].get()->getTypeOfCell();
+
+        output << cell_type;
+
+        if (board.cells_[position].get()->getPlayer() != NULL)
+        {
+            int player_position = board.cells_[position].get()->getPlayer()->getPlayerInfo().first;
+
+            if (player_position == cell_final_position and position + 1 == player_position)
+            {
+                output << player_position << " ";
+            }
+            else if (player_position != cell_final_position)
+            {
+                output << player_position << " ";
+            }
+            else
+            {
+                output << "  ";
+            }
+        }
+        else
+        {
+            output << "  ";
+        }
+
+        if (count == 6)
+        {
+            output << '\n';
+
+            count = 0;
+        }
+
+        count++;
+    }
+
+    return output;
 }

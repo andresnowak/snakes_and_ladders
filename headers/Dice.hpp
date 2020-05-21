@@ -9,7 +9,7 @@ private:
 public:
     Dice()
     {
-        srand(time(NULL));
+        //srand(time(NULL));
     }
 
     int roll()

@@ -10,7 +10,7 @@
 
 Game::Game()
 {
-    srand(time(NULL));
+    srand(time(NULL)); //only initialize once at the start of the game
 
     createPlayers(2);
 }
@@ -19,19 +19,19 @@ void Game::start()
 {
     board_ = Board();
 
-    std::vector<std::shared_ptr<Cell>> board_cells = board_.getCells();
-
-    std::cout << board_cells.size() << std::endl;
+    std::cout << board_ << std::endl;
 
     std::cout << "Press C to continue next turn, or E to end the game:" << std::endl;
 
     choseOption();
 
-    play(board_cells);
+    play();
 }
 
-void Game::play(std::vector<std::shared_ptr<Cell>> board_cells)
+void Game::play()
 {
+    std::vector<std::shared_ptr<Cell>> board_cells = board_.getCells();
+
     int turn = 1;
 
     while (true)
@@ -47,6 +47,8 @@ void Game::play(std::vector<std::shared_ptr<Cell>> board_cells)
         int player_position = player_info.second;
         int player_number = player_info.first;
 
+        deletePlayerFromBoard(player_position);
+
         int current_position = dice_throw + player_position;
 
         bool player_won = checkPlayerHasWon(current_position);
@@ -58,7 +60,11 @@ void Game::play(std::vector<std::shared_ptr<Cell>> board_cells)
 
         Cell *cell = board_cells[current_position - 1].get();
 
+        addPlayerToBoard(player, current_position);
+
         cell->movePosition(current_position);
+
+        std::cout << board_ << std::endl;
 
         printGame(player_info, turn, cell, dice_throw, current_position);
 
@@ -169,6 +175,19 @@ void Game::createPlayers(int amount_of_players)
 {
     for (int i = 1; i <= amount_of_players; i++)
     {
-        players_.push(Player(i));
+        Player player = Player(i);
+        players_.push(player);
+
+        // addPlayerToBoard(player, 0);
     }
+}
+
+void Game::addPlayerToBoard(Player *player, int position)
+{
+    board_.getCells()[position - 1].get()->addPlayerToCell(*player);
+}
+
+void Game::deletePlayerFromBoard(int position)
+{
+    board_.getCells()[position - 1].get()->deletePlayerFromCell();
 }

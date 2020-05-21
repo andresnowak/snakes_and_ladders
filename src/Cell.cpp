@@ -2,12 +2,17 @@
 
 #include "../headers/Cell.hpp"
 
-void Cell::addPlayerToCell(Player player)
+void Cell::addPlayerToCell(Player &player)
 {
-    player_ = player;
+    player_ = &player;
 }
 
-std::optional<Player> Cell::getPlayer()
+void Cell::deletePlayerFromCell()
+{
+    player_ = NULL; // maybe theres a better way to do this
+}
+
+Player *Cell::getPlayer()
 {
     return player_;
 }
