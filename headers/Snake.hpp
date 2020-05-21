@@ -11,21 +11,30 @@ private:
 
     const static int size_ = 3;
 
-public:
-    Snake(int position)
+    void setPositionCell(int position)
     {
         tail_position_ = position;
         head_position_ = position - size_;
-
-        std::pair<int, int> positions = {tail_position_, head_position_};
-
-        setTypeOfCell(LOGO);
-
-        setPositionCell(positions);
     }
 
-    void goDown(int &position)
+public:
+    Snake(int position)
     {
-        position = tail_position_;
+        setPositionCell(position);
+    }
+
+    const std::string getTypeOfCell()
+    {
+        return LOGO;
+    }
+
+    void movePosition(int &position)
+    {
+        position = head_position_;
+    }
+
+    std::pair<int, int> getPositionCell()
+    {
+        return {tail_position_, head_position_};
     }
 };

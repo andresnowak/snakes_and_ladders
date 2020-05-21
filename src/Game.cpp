@@ -149,7 +149,7 @@ void Game::playerHasWon(bool &won, int &player_number)
 
 void Game::numberOfTurnsExceeded(int &turns)
 {
-    if (turns >= limit_of_turns)
+    if (turns > limit_of_turns_)
     {
         end(2);
     }

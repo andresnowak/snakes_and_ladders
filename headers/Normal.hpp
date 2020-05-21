@@ -8,15 +8,29 @@ private:
 
     int cell_position;
 
+    void setPositionCell(int position)
+    {
+        cell_position = position;
+    }
+
 public:
     Normal(int start_position)
     {
-        cell_position = start_position;
+        setPositionCell(start_position);
+    }
 
-        std::pair<int, int> positions = {start_position, NULL};
+    void movePosition(int &position)
+    {
+        position = cell_position;
+    }
 
-        setTypeOfCell(LOGO);
+    const std::string getTypeOfCell()
+    {
+        return LOGO;
+    }
 
-        setPositionCell(positions);
+    std::pair<int, int> getPositionCell()
+    {
+        return {cell_position, NULL};
     }
 };

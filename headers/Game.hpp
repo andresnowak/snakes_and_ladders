@@ -14,7 +14,7 @@ private:
     Board board_;
     Dice dice_;
 
-    const int static limit_of_turns = 20;
+    const int static limit_of_turns_ = 20;
 
     std::queue<Player> players_;
 

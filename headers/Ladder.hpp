@@ -11,21 +11,30 @@ private:
 
     const static int size_ = 3;
 
-public:
-    Ladder(int position)
+    void setPositionCell(int position)
     {
         start_position_ = position;
         end_position_ = position + size_;
-
-        std::pair<int, int> positions = {start_position_, end_position_};
-
-        setTypeOfCell(LOGO);
-
-        setPositionCell(positions);
     }
 
-    void goUp(int &position)
+public:
+    Ladder(int position)
+    {
+        setPositionCell(position);
+    }
+
+    void movePosition(int &position)
     {
         position = end_position_;
+    }
+
+    std::pair<int, int> getPositionCell()
+    {
+        return {start_position_, end_position_};
+    }
+
+    const std::string getTypeOfCell()
+    {
+        return LOGO;
     }
 };

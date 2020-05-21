@@ -10,6 +10,8 @@ Board::Board()
 {
     size_ = 30;
 
+    cells_ = std::vector<std::shared_ptr<Cell>>(size_);
+
     createBoard();
 }
 
@@ -59,14 +61,16 @@ void Board::createBoard()
         {
             std::shared_ptr<Cell> cell = cellToChose(position);
 
-            cells_.push_back(cell);
+            int end_position = cell.get()->getPositionCell().second;
+
+            cells_[position - 1] = cell;
+
+            if (end_position != 0)
+            {
+                cells_[end_position - 1] = cell;
+            }
 
             positions.insert(cell.get()->getPositionCell().second);
-        }
-        else
-        {
-            //TODO: porque tiene que ser la posicion - 2 y no -1
-            cells_.push_back(cells_[position - 2]);
         }
 
         positions.insert(position);

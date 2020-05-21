@@ -14,23 +14,16 @@ class Cell
 private:
     std::optional<Player> player_;
 
-    std::string type_of_cell_;
-
-    std::pair<int, int> position_cell_ = {NULL, NULL};
-
 public:
     void addPlayerToCell(Player player);
 
-    std::pair<int, int> getPositionCell();
+    virtual std::pair<int, int> getPositionCell() = 0;
 
     std::optional<Player> getPlayer();
 
-    void setPositionCell(std::pair<int, int> position_cell);
-    void setTypeOfCell(std::string logo);
+    virtual void movePosition(int &position) = 0;
 
-    void movePosition(int &position);
-
-    std::string getTypeOfCell();
+    virtual const std::string getTypeOfCell() = 0;
 };
 
 #endif
