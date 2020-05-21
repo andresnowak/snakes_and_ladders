@@ -7,4 +7,4 @@ And its a simple game where two players play by typing in the console "C" to con
 
 To complie and run this game run the run.sh program in linux or if you are not in linux or want to complile it yourself just complie all the docs in src directory.
 
-**c++ 14** or newer necessary to run this program.
+**c++ 11** or newer recommended to run this program.

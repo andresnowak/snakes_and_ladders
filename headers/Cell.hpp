@@ -1,10 +1,7 @@
 #include <utility>
 #include <functional>
-#include <experimental/optional>
 
 #include "Player.hpp"
-
-#define optional experimental::optional
 
 #ifndef CELL_H
 #define CELL_H
