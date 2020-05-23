@@ -9,7 +9,7 @@
 class Cell
 {
 private:
-    Player *player_;
+    Player *player_ = NULL;
 
 public:
     void addPlayerToCell(Player &player);
