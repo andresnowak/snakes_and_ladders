@@ -4,15 +4,36 @@
 
 void Cell::addPlayerToCell(Player &player)
 {
-    player_ = &player;
+    players_[player.getPlayerInfo().first - 1] = &player;
 }
 
-void Cell::deletePlayerFromCell()
+void Cell::deletePlayerFromCell(Player &player)
 {
-    player_ = NULL; // maybe theres a better way to do this
+    players_[player.getPlayerInfo().first - 1] = NULL;
 }
 
-Player *Cell::getPlayer()
+std::vector<Player *> Cell::getPlayers()
 {
-    return player_;
+    return players_;
+}
+
+std::ostream &operator<<(std::ostream &output, Cell *cell)
+{
+    output << cell->getTypeOfCell();
+
+    for (auto x : cell->getPlayers())
+    {
+        if (x != NULL)
+        {
+            int player_number = x->getPlayerInfo().first;
+
+            output << player_number;
+        }
+        else
+        {
+            output << " ";
+        }
+    }
+
+    return output;
 }

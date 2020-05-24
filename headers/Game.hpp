@@ -37,7 +37,7 @@ private:
     void numberOfTurnsExceeded(int &turns);
 
     void addPlayerToBoard(Player *player, int position);
-    void deletePlayerFromBoard(int position);
+    void deletePlayerFromBoard(int position, Player &player);
 
 public:
     Game();

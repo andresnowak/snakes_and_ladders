@@ -94,21 +94,7 @@ std::ostream &operator<<(std::ostream &output, const Board &board)
     {
         Cell *cell_actual = board.cells_[position].get();
 
-        int cell_final_position = cell_actual->getPositionCell().second;
-        std::string cell_type = cell_actual->getTypeOfCell();
-
-        output << cell_type;
-
-        if (board.cells_[position].get()->getPlayer() != NULL)
-        {
-            std::pair<int, int> player_num_pos = cell_actual->getPlayer()->getPlayerInfo();
-
-            output << player_num_pos.first << " ";
-        }
-        else
-        {
-            output << "  ";
-        }
+        output << cell_actual << " ";
 
         if (count == 6)
         {

@@ -1,5 +1,7 @@
 #include <utility>
 #include <functional>
+#include <vector>
+#include <iostream>
 
 #include "Player.hpp"
 
@@ -9,20 +11,23 @@
 class Cell
 {
 private:
-    Player *player_ = NULL;
+    std::vector<Player *> players_ = std::vector<Player *>(2, NULL);
 
 public:
     void addPlayerToCell(Player &player);
 
     virtual std::pair<int, int> getPositionCell() = 0;
 
-    Player *getPlayer();
+    std::vector<Player *> getPlayers();
 
     virtual void movePosition(int &position) = 0;
 
     virtual const std::string getTypeOfCell() = 0;
 
-    void deletePlayerFromCell();
+    void deletePlayerFromCell(Player &player);
+
+    friend std::ostream &
+    operator<<(std::ostream &output, Cell *cell);
 };
 
 #endif

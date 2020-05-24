@@ -47,7 +47,7 @@ void Game::play()
         int player_position = player_info.second;
         int player_number = player_info.first;
 
-        deletePlayerFromBoard(player_position);
+        deletePlayerFromBoard(player_position, *player);
 
         int current_position = dice_throw + player_position;
 
@@ -184,7 +184,7 @@ void Game::addPlayerToBoard(Player *player, int position)
     board_.getCells()[position - 1].get()->addPlayerToCell(*player);
 }
 
-void Game::deletePlayerFromBoard(int position)
+void Game::deletePlayerFromBoard(int position, Player &player)
 {
-    board_.getCells()[position - 1].get()->deletePlayerFromCell();
+    board_.getCells()[position - 1].get()->deletePlayerFromCell(player);
 }
