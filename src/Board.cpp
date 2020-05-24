@@ -44,7 +44,7 @@ std::shared_ptr<Cell> Board::cellToChose(int &position)
 
         int end_position = snake.get()->getPositionCell().second;
 
-        if (end_position > 0 and cells_[end_position].get()->getTypeOfCell() != "L")
+        if (end_position > 0 and cells_[end_position - 1].get()->getTypeOfCell() != "L")
         {
             amount_of_cells["snake"]++;
 
