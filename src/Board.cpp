@@ -29,7 +29,9 @@ std::shared_ptr<Cell> Board::cellToChose(int &position)
     {
         std::shared_ptr<Ladder> ladder(new Ladder(position));
 
-        if (ladder.get()->getPositionCell().second < size_)
+        int end_position = ladder.get()->getPositionCell().second;
+
+        if (end_position < size_)
         {
             amount_of_cells["ladder"]++;
 
@@ -40,7 +42,9 @@ std::shared_ptr<Cell> Board::cellToChose(int &position)
     {
         std::shared_ptr<Snake> snake(new Snake(position));
 
-        if (snake.get()->getPositionCell().second > 0)
+        int end_position = snake.get()->getPositionCell().second;
+
+        if (end_position > 0 and cells_[end_position].get()->getTypeOfCell() != "L")
         {
             amount_of_cells["snake"]++;
 
@@ -88,27 +92,18 @@ std::ostream &operator<<(std::ostream &output, const Board &board)
 
     for (int position = 0; position < board.size_; position++)
     {
-        int cell_final_position = board.cells_[position].get()->getPositionCell().second;
-        std::string cell_type = board.cells_[position].get()->getTypeOfCell();
+        Cell *cell_actual = board.cells_[position].get();
+
+        int cell_final_position = cell_actual->getPositionCell().second;
+        std::string cell_type = cell_actual->getTypeOfCell();
 
         output << cell_type;
 
         if (board.cells_[position].get()->getPlayer() != NULL)
         {
-            int player_position = board.cells_[position].get()->getPlayer()->getPlayerInfo().first;
+            std::pair<int, int> player_num_pos = cell_actual->getPlayer()->getPlayerInfo();
 
-            if (player_position == cell_final_position and position + 1 == player_position)
-            {
-                output << player_position << " ";
-            }
-            else if (player_position != cell_final_position)
-            {
-                output << player_position << " ";
-            }
-            else
-            {
-                output << "  ";
-            }
+            output << player_num_pos.first << " ";
         }
         else
         {

@@ -60,17 +60,17 @@ void Game::play()
 
         Cell *cell = board_cells[current_position - 1].get();
 
-        addPlayerToBoard(player, current_position);
-
         cell->movePosition(current_position);
+
+        player->movePlayer(current_position);
+
+        addPlayerToBoard(player, current_position);
 
         std::cout << board_ << std::endl;
 
-        printGame(player_info, turn, cell, dice_throw, current_position);
+        printGame(player_number, player_position, turn, cell, dice_throw, current_position);
 
         playerHasWon(player_won, player_number);
-
-        player->movePlayer(current_position);
 
         turn++;
 
@@ -120,11 +120,8 @@ void Game::choseOption()
     }
 }
 
-void Game::printGame(std::pair<int, int> &player_info, int &turn, Cell *cell, int &dice_throw, int &final_position)
+void Game::printGame(int &player_number, int &player_position, int &turn, Cell *cell, int &dice_throw, int &final_position)
 {
-    int player_position = player_info.second;
-    int player_number = player_info.first;
-
     std::string type_of_cell = cell->getTypeOfCell();
 
     std::cout << turn << " " << player_number << " " << player_position << " "
