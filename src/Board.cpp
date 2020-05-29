@@ -3,82 +3,120 @@
 #include "../headers/Snake.hpp"
 #include "../headers/Ladder.hpp"
 
-#include <unordered_set>
 #include <iostream>
 
 Board::Board()
 {
     size_ = 30;
 
-    cells_ = std::vector<std::shared_ptr<Cell>>(size_);
+    cells_ = std::vector<std::shared_ptr<Cell>>(size_, NULL);
+
+    amount_of_players_ = 3;
+
+    amount_of_snakes_cells_ = 4;
+    amount_of_ladders_cells_ = 5;
+
+    penalty_ = 4;
+    reward_ = 5;
 
     createBoard();
 }
 
-std::shared_ptr<Cell> Board::cellToChose(int &position)
+Board::Board(int size, int amount_snakes, int amount_ladders, int penalty, int reward, int amount_of_players)
 {
-    int cell = rand() % 3 + 1;
+    size_ = size;
 
-    if (cell == 1)
+    cells_ = std::vector<std::shared_ptr<Cell>>(size_, NULL);
+
+    amount_of_players_ = amount_of_players;
+
+    amount_of_snakes_cells_ = amount_snakes;
+    amount_of_ladders_cells_ = amount_ladders;
+
+    penalty_ = penalty;
+    reward_ = reward;
+
+    createBoard();
+}
+
+void Board::createSnakesCells()
+{
+    int count = 0;
+
+    while (count < amount_of_snakes_cells_)
     {
-        amount_of_cells["normal"]++;
+        int position = rand() % (size_ - 1);
 
-        return std::shared_ptr<Normal>(new Normal(position));
-    }
-    else if (cell == 2 and position < size_ and amount_of_cells["ladder"] < 3 and position > 1)
-    {
-        std::shared_ptr<Ladder> ladder(new Ladder(position));
-
-        int end_position = ladder.get()->getPositionCell().second;
-
-        if (end_position < size_)
+        if (cells_[position] == NULL)
         {
-            amount_of_cells["ladder"]++;
+            std::shared_ptr<Snake> snake(new Snake(amount_of_players_, position + 1, penalty_));
 
-            return ladder;
+            int end_position = snake.get()->getPositionCell().second;
+
+            if (end_position > 0 and cells_[end_position - 1] == NULL)
+            {
+                amount_of_cells["snake"]++;
+
+                cells_[position] = snake;
+                cells_[end_position - 1] = snake;
+
+                positions_.insert(position + 1);
+
+                count++;
+            }
         }
     }
-    else if (cell == 3 and position < size_ and amount_of_cells["snake"] < 3)
+}
+
+void Board::createLaddersCells()
+{
+    int count = 0;
+
+    while (count < amount_of_ladders_cells_)
     {
-        std::shared_ptr<Snake> snake(new Snake(position));
+        int position = rand() % (size_ - 1);
 
-        int end_position = snake.get()->getPositionCell().second;
-
-        if (end_position > 0 and cells_[end_position - 1].get()->getTypeOfCell() != "L")
+        if (cells_[position] == NULL)
         {
-            amount_of_cells["snake"]++;
+            std::shared_ptr<Ladder> ladder(new Ladder(amount_of_players_, position + 1, reward_));
 
-            return snake;
+            int end_position = ladder.get()->getPositionCell().second;
+
+            if (end_position < size_ and cells_[end_position - 1] == NULL)
+            {
+                amount_of_cells["ladder"]++;
+
+                cells_[position] = ladder;
+                cells_[end_position - 1] = ladder;
+
+                positions_.insert(position + 1);
+
+                count++;
+            }
         }
     }
+}
 
-    return cellToChose(position);
+void Board::createNormalCells()
+{
+    int count = 0;
+
+    for (int position = 0; position < size_; position++)
+    {
+        if (cells_[position] == NULL)
+        {
+            std::shared_ptr<Normal> normal(new Normal(amount_of_players_, position + 1));
+
+            cells_[position] = normal;
+        }
+    }
 }
 
 void Board::createBoard()
 {
-    std::unordered_set<int> positions;
-
-    for (int position = 1; position <= size_; position++)
-    {
-        if (positions.count(position) == 0)
-        {
-            std::shared_ptr<Cell> cell = cellToChose(position);
-
-            int end_position = cell.get()->getPositionCell().second;
-
-            cells_[position - 1] = cell;
-
-            if (end_position != 0)
-            {
-                cells_[end_position - 1] = cell;
-            }
-
-            positions.insert(cell.get()->getPositionCell().second);
-        }
-
-        positions.insert(position);
-    }
+    createSnakesCells();
+    createLaddersCells();
+    createNormalCells();
 }
 
 std::vector<std::shared_ptr<Cell>> Board::getCells()

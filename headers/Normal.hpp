@@ -14,7 +14,7 @@ private:
     }
 
 public:
-    Normal(int start_position)
+    Normal(int amount_of_players, int start_position) : Cell(amount_of_players)
     {
         setPositionCell(start_position);
     }

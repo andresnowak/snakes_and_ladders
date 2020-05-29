@@ -9,17 +9,26 @@ private:
     int start_position_;
     int end_position_;
 
-    const static int size_ = 3;
+    int reward_;
 
     void setPositionCell(int position)
     {
         start_position_ = position;
-        end_position_ = position + size_;
+        end_position_ = position + reward_;
     }
 
 public:
-    Ladder(int position)
+    Ladder(int amount_of_players, int position) : Cell(amount_of_players)
     {
+        reward_ = 3;
+
+        setPositionCell(position);
+    }
+
+    Ladder(int amount_of_players, int position, int reward) : Cell(amount_of_players)
+    {
+        reward_ = reward;
+
         setPositionCell(position);
     }
 

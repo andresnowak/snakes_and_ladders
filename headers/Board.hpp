@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <unordered_map>
+#include <unordered_set>
 
 #ifndef BOARD_H
 #define BOARD_H
@@ -14,17 +15,30 @@ private:
 
     std::vector<std::shared_ptr<Cell>> cells_;
 
-    std::unordered_map<std::string, int> amount_of_cells = {{"ladder", 0}, {"normal", 0}, {"snake", 0}};
+    std::unordered_set<int> positions_;
+
+    int amount_of_players_;
+
+    int amount_of_snakes_cells_;
+    int amount_of_ladders_cells_;
+
+    int penalty_;
+    int reward_;
+
+    std::unordered_map<std::string, int>
+        amount_of_cells = {{"ladder", 0}, {"normal", 0}, {"snake", 0}};
 
     void createBoard();
 
 public:
-    Board(int size);
+    Board(int, int, int, int, int, int);
     Board();
 
     friend std::ostream &operator<<(std::ostream &output, const Board &board);
 
-    std::shared_ptr<Cell> cellToChose(int &position);
+    void createSnakesCells();
+    void createLaddersCells();
+    void createNormalCells();
 
     std::vector<std::shared_ptr<Cell>> getCells();
 };

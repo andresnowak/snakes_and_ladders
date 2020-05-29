@@ -12,12 +12,12 @@ Game::Game()
 {
     srand(time(NULL)); //only initialize once at the start of the game
 
-    createPlayers(2);
+    createPlayers(4);
 }
 
 void Game::start()
 {
-    board_ = Board();
+    board_ = Board(40, 4, 5, 3, 4, 4);
 
     std::cout << board_ << std::endl;
 

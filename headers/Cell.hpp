@@ -11,9 +11,11 @@
 class Cell
 {
 private:
-    std::vector<Player *> players_ = std::vector<Player *>(2, NULL);
+    std::vector<Player *> players_;
 
 public:
+    Cell(int);
+
     void addPlayerToCell(Player &player);
 
     virtual std::pair<int, int> getPositionCell() = 0;

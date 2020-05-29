@@ -2,6 +2,11 @@
 
 #include "../headers/Cell.hpp"
 
+Cell::Cell(int amount_of_players)
+{
+    players_ = std::vector<Player *>(amount_of_players, NULL);
+}
+
 void Cell::addPlayerToCell(Player &player)
 {
     players_[player.getPlayerInfo().first - 1] = &player;

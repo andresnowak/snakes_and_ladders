@@ -9,17 +9,26 @@ private:
     int tail_position_;
     int head_position_;
 
-    const static int size_ = 3;
+    int penalty_;
 
     void setPositionCell(int position)
     {
         tail_position_ = position;
-        head_position_ = position - size_;
+        head_position_ = position - penalty_;
     }
 
 public:
-    Snake(int position)
+    Snake(int amount_of_players, int position) : Cell(amount_of_players)
     {
+        penalty_ = 3;
+
+        setPositionCell(position);
+    }
+
+    Snake(int amount_of_players, int position, int penalty) : Cell(amount_of_players)
+    {
+        penalty_ = penalty;
+
         setPositionCell(position);
     }
 
