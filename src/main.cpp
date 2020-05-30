@@ -4,12 +4,16 @@
 */
 
 #include "../headers/Game.hpp"
+#include "../headers/Automatic.hpp"
+#include "../headers/Manual.hpp"
 
 #include <iostream>
 
 int main()
 {
-    Game game = Game();
+    Game *game;
 
-    game.start();
+    game = new Automatic(30, 3, 3, 3, 4, 3, 20);
+
+    game->start();
 }

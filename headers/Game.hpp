@@ -1,9 +1,11 @@
-#include "../headers/Board.hpp"
-#include "../headers/Dice.hpp"
+#include "Board.hpp"
+#include "Dice.hpp"
 
 #include <queue>
 #include <string>
 #include <utility>
+
+#include <queue>
 
 #ifndef GAME_H
 #define GAME_H
@@ -14,16 +16,15 @@ private:
     Board board_;
     Dice dice_;
 
-    const int static limit_of_turns_ = 20;
+    int limit_of_turns_;
 
     std::queue<Player> players_;
 
-    void play();
+protected:
     void end(int ending);
 
     std::string getInput();
 
-    void continueGame();
     void choseOption();
 
     void printGame(int &player_number, int &player_position, int &turn, Cell *cell, int &dice_throw, int &final_position);
@@ -39,10 +40,14 @@ private:
     void addPlayerToBoard(Player *player, int position);
     void deletePlayerFromBoard(int position, Player &player);
 
-public:
-    Game();
+    Board *getBoard();
+    std::queue<Player> *getPlayers();
+    Dice *getDice();
 
-    void start();
+public:
+    Game(int, int, int, int, int, int, int);
+
+    virtual void start() = 0;
 };
 
 #endif
