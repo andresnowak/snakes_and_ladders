@@ -1,5 +1,8 @@
 #include "../headers/Automatic.hpp"
 
+#include <chrono>
+#include <thread>
+
 Automatic::Automatic(int tiles, int number_snakes, int number_ladders, int penalty, int reward, int number_players, int turns) : Game(tiles, number_snakes, number_ladders, penalty, reward, number_players, turns)
 {
     board_ = getBoard();
@@ -10,6 +13,10 @@ Automatic::Automatic(int tiles, int number_snakes, int number_ladders, int penal
 void Automatic::start()
 {
     std::cout << *board_ << std::endl;
+
+    std::cout << "Press C to start game, or E to end the game:" << std::endl;
+
+    choseOption();
 
     play();
 }
@@ -62,6 +69,8 @@ void Automatic::play()
 
         players_->pop();
         players_->push(*player);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(500)); // sleep multiplatform
     }
 
     end(0);

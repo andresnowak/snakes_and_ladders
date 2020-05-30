@@ -8,6 +8,11 @@
 #include "../headers/Manual.hpp"
 
 #include <iostream>
+#include <iostream>
+
+void menu()
+{
+}
 
 int main()
 {
