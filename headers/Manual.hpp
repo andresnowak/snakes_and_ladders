@@ -1,6 +1,8 @@
 #include "Game.hpp"
 #include "Board.hpp"
 
+#include <functional>
+
 #ifndef MANUAL_H
 #define MANUAL_H
 

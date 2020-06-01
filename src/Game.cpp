@@ -135,3 +135,47 @@ Dice *Game::getDice()
 {
     return &dice_;
 }
+
+void Game::play(int &turn, int board_size)
+{
+    numberOfTurnsExceeded(turn);
+
+    int dice_throw = dice_.roll();
+
+    Player *player = &players_.front();
+
+    std::pair<int, int> player_info = player->getPlayerInfo();
+
+    int player_position = player_info.second;
+    int player_number = player_info.first;
+
+    deletePlayerFromBoard(player_position, *player);
+
+    int current_position = dice_throw + player_position;
+
+    bool player_won = checkPlayerHasWon(current_position);
+
+    if (player_won)
+    {
+        current_position = board_size;
+    }
+
+    std::string cell_type = board_.getTypeOfCell(current_position);
+
+    board_.movePositionInBoard(current_position);
+
+    player->movePlayer(current_position);
+
+    addPlayerToBoard(player, current_position);
+
+    std::cout << board_ << std::endl;
+
+    printGame(player_number, player_position, turn, cell_type, dice_throw, current_position);
+
+    playerHasWon(player_won, player_number);
+
+    turn++;
+
+    players_.pop();
+    players_.push(*player);
+}

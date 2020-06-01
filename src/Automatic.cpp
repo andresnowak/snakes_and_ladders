@@ -25,53 +25,10 @@ void Automatic::play()
 {
     int board_size = board_->getSizeOfBoard();
 
-    int turn = 1;
-
+    int turns = 1;
     while (true)
     {
-        numberOfTurnsExceeded(turn);
-
-        int dice_throw = dice_->roll();
-
-        Player *player = &players_->front();
-
-        std::pair<int, int> player_info = player->getPlayerInfo();
-
-        int player_position = player_info.second;
-        int player_number = player_info.first;
-
-        deletePlayerFromBoard(player_position, *player);
-
-        int current_position = dice_throw + player_position;
-
-        bool player_won = checkPlayerHasWon(current_position);
-
-        if (player_won)
-        {
-            current_position = board_size;
-        }
-
-        std::string cell_type = board_->getTypeOfCell(current_position);
-
-        board_->movePositionInBoard(current_position);
-
-        player->movePlayer(current_position);
-
-        addPlayerToBoard(player, current_position);
-
-        std::cout << *board_ << std::endl;
-
-        printGame(player_number, player_position, turn, cell_type, dice_throw, current_position);
-
-        playerHasWon(player_won, player_number);
-
-        turn++;
-
-        players_->pop();
-        players_->push(*player);
-
+        Game::play(turns, board_size);
         std::this_thread::sleep_for(std::chrono::milliseconds(500)); // sleep multiplatform
     }
-
-    end(0);
 }

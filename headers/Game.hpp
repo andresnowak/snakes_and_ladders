@@ -44,6 +44,8 @@ protected:
     std::queue<Player> *getPlayers();
     Dice *getDice();
 
+    virtual void play(int &, int);
+
 public:
     Game(int, int, int, int, int, int, int);
 
