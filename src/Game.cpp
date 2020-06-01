@@ -56,12 +56,10 @@ void Game::choseOption()
     }
 }
 
-void Game::printGame(int &player_number, int &player_position, int &turn, Cell *cell, int &dice_throw, int &final_position)
+void Game::printGame(int &player_number, int &player_position, int &turn, std::string &cell_type, int &dice_throw, int &final_position)
 {
-    std::string type_of_cell = cell->getTypeOfCell();
-
     std::cout << turn << " " << player_number << " " << player_position << " "
-              << dice_throw << " " << type_of_cell << " " << final_position << std::endl;
+              << dice_throw << " " << cell_type << " " << final_position << std::endl;
 }
 
 bool Game::checkPlayerHasWon(int position)

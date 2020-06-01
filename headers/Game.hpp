@@ -27,7 +27,7 @@ protected:
 
     void choseOption();
 
-    void printGame(int &player_number, int &player_position, int &turn, Cell *cell, int &dice_throw, int &final_position);
+    void printGame(int &player_number, int &player_position, int &turn, std::string &cell_type, int &dice_throw, int &final_position);
 
     bool checkPlayerHasWon(int position);
 

@@ -41,6 +41,16 @@ public:
     void createNormalCells();
 
     std::vector<std::shared_ptr<Cell>> getCells();
+
+    void movePositionInBoard(int &position_board);
+
+    const std::string getTypeOfCell(int &position_board);
+
+    void addPlayerToBoardCell(Player &player, int &position_board);
+
+    void deletePlayerFromBoardCell(Player &player, int &position_board);
+
+    int getSizeOfBoard();
 };
 
 #endif

@@ -146,3 +146,28 @@ std::ostream &operator<<(std::ostream &output, const Board &board)
 
     return output;
 }
+
+void Board::movePositionInBoard(int &position_board)
+{
+    cells_[position_board - 1].get()->movePosition(position_board);
+}
+
+const std::string Board::getTypeOfCell(int &position_board)
+{
+    return cells_[position_board - 1].get()->getTypeOfCell();
+}
+
+void Board::addPlayerToBoardCell(Player &player, int &position_board)
+{
+    cells_[position_board - 1].get()->addPlayerToCell(player);
+}
+
+void Board::deletePlayerFromBoardCell(Player &player, int &position_board)
+{
+    cells_[position_board - 1].get()->deletePlayerFromCell(player);
+}
+
+int Board::getSizeOfBoard()
+{
+    return cells_.size();
+}

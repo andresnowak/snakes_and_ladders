@@ -96,11 +96,11 @@ void menu()
     std::cout << "How many ladders do you want: " << std::endl;
     getNumberSizeOfVariable(game_info[2], "Number", "ladders", min_snakes_ladders, max_snakes_ladders);
 
-    std::cout << "How big do you want the reward to be: " << std::endl;
-    getNumberSizeOfVariable(game_info[3], "Size", "reward", min_reward_penalty, max_reward_penalty);
-
     std::cout << "How big do you want the penalty to be: " << std::endl;
-    getNumberSizeOfVariable(game_info[4], "Size", "penalty", min_reward_penalty, max_reward_penalty);
+    getNumberSizeOfVariable(game_info[3], "Size", "penalty", min_reward_penalty, max_reward_penalty);
+
+    std::cout << "How big do you want the reward to be: " << std::endl;
+    getNumberSizeOfVariable(game_info[4], "Size", "reward", min_reward_penalty, max_reward_penalty);
 
     std::cout << "How many players are going to play: " << std::endl;
     int min_players = 2;

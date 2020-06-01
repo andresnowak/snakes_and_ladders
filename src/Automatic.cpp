@@ -23,7 +23,7 @@ void Automatic::start()
 
 void Automatic::play()
 {
-    std::vector<std::shared_ptr<Cell>> board_cells = board_->getCells();
+    int board_size = board_->getSizeOfBoard();
 
     int turn = 1;
 
@@ -48,12 +48,12 @@ void Automatic::play()
 
         if (player_won)
         {
-            current_position = board_cells.size();
+            current_position = board_size;
         }
 
-        Cell *cell = board_cells[current_position - 1].get();
+        std::string cell_type = board_->getTypeOfCell(current_position);
 
-        cell->movePosition(current_position);
+        board_->movePositionInBoard(current_position);
 
         player->movePlayer(current_position);
 
@@ -61,7 +61,7 @@ void Automatic::play()
 
         std::cout << *board_ << std::endl;
 
-        printGame(player_number, player_position, turn, cell, dice_throw, current_position);
+        printGame(player_number, player_position, turn, cell_type, dice_throw, current_position);
 
         playerHasWon(player_won, player_number);
 
