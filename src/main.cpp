@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
+#include <ios>
 
 void printErrorMessageMenu(std::string adjective, std::string type, int min, int max)
 {
@@ -37,6 +39,12 @@ int getNumberSizeOfVariable(int &variable, std::string adjective, std::string ty
         return variable;
     }
 
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    /*because we add the value to a int we need to clear the buffer because it 
+    enters in a loop because the buffer doesnt have anywhere to go because a 
+    letter cant be an int*/
+
     printErrorMessageMenu(adjective, type, min, max);
 
     return getNumberSizeOfVariable(variable, adjective, type, min, max);
@@ -51,6 +59,7 @@ std::string getGameType()
     {
         return game_type;
     }
+
     std::cout << "The game type you inserted is incorrect, try again: " << std::endl;
 
     return getGameType();
