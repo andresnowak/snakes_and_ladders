@@ -45,7 +45,7 @@ void Board::createSnakesCells()
 
     while (count < amount_of_snakes_cells_)
     {
-        int position = rand() % (size_ - 2); // we dont want the last cell to be a snake
+        int position = rand() % (size_ - 1); // we dont want the last cell to be a snake
 
         if (cells_[position] == NULL)
         {
@@ -74,7 +74,7 @@ void Board::createLaddersCells()
 
     while (count < amount_of_ladders_cells_)
     {
-        int position = rand() % (size_ - 1);
+        int position = rand() % size_;
 
         if (cells_[position] == NULL)
         {
