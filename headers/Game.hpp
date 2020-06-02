@@ -37,9 +37,6 @@ protected:
 
     void numberOfTurnsExceeded(int &turns);
 
-    void addPlayerToBoard(Player *player, int position);
-    void deletePlayerFromBoard(int position, Player &player);
-
     Board *getBoard();
     std::queue<Player> *getPlayers();
     Dice *getDice();

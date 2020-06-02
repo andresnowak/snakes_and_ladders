@@ -64,7 +64,7 @@ void Game::printGame(int &player_number, int &player_position, int &turn, std::s
 
 bool Game::checkPlayerHasWon(int position)
 {
-    if (position >= board_.getCells().size())
+    if (position >= board_.getSizeOfBoard())
     {
         return true;
     }
@@ -111,16 +111,6 @@ void Game::createPlayers(int amount_of_players)
     }
 }
 
-void Game::addPlayerToBoard(Player *player, int position)
-{
-    board_.getCells()[position - 1].get()->addPlayerToCell(*player);
-}
-
-void Game::deletePlayerFromBoard(int position, Player &player)
-{
-    board_.getCells()[position - 1].get()->deletePlayerFromCell(player);
-}
-
 Board *Game::getBoard()
 {
     return &board_;
@@ -149,16 +139,9 @@ void Game::play(int &turn, int board_size)
     int player_position = player_info.second;
     int player_number = player_info.first;
 
-    deletePlayerFromBoard(player_position, *player);
+    board_.deletePlayerFromBoardCell(*player, player_position);
 
     int current_position = dice_throw + player_position;
-
-    bool player_won = checkPlayerHasWon(current_position);
-
-    if (player_won)
-    {
-        current_position = board_size;
-    }
 
     std::string cell_type = board_.getTypeOfCell(current_position);
 
@@ -166,11 +149,13 @@ void Game::play(int &turn, int board_size)
 
     player->movePlayer(current_position);
 
-    addPlayerToBoard(player, current_position);
+    board_.addPlayerToBoardCell(*player, current_position);
 
     std::cout << board_ << std::endl;
 
     printGame(player_number, player_position, turn, cell_type, dice_throw, current_position);
+
+    bool player_won = checkPlayerHasWon(current_position);
 
     playerHasWon(player_won, player_number);
 

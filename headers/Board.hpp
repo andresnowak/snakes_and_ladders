@@ -40,8 +40,6 @@ public:
     void createLaddersCells();
     void createNormalCells();
 
-    std::vector<std::shared_ptr<Cell>> getCells();
-
     void movePositionInBoard(int &position_board);
 
     const std::string getTypeOfCell(int &position_board);

@@ -119,11 +119,6 @@ void Board::createBoard()
     createNormalCells();
 }
 
-std::vector<std::shared_ptr<Cell>> Board::getCells()
-{
-    return cells_;
-}
-
 std::ostream &operator<<(std::ostream &output, const Board &board)
 {
     int count = 1;
@@ -149,12 +144,25 @@ std::ostream &operator<<(std::ostream &output, const Board &board)
 
 void Board::movePositionInBoard(int &position_board)
 {
+    if (position_board > cells_.size())
+    {
+        position_board = cells_.size();
+    }
+
     cells_[position_board - 1].get()->movePosition(position_board);
 }
 
 const std::string Board::getTypeOfCell(int &position_board)
 {
-    return cells_[position_board - 1].get()->getTypeOfCell();
+    if (position_board > cells_.size())
+    {
+        return cells_[cells_.size() - 1].get()->getTypeOfCell();
+    }
+    else
+    {
+
+        return cells_[position_board - 1].get()->getTypeOfCell();
+    }
 }
 
 void Board::addPlayerToBoardCell(Player &player, int &position_board)
