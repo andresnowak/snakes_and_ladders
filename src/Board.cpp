@@ -55,12 +55,8 @@ void Board::createSnakesCells()
 
             if (end_position > 0 and cells_[end_position - 1] == NULL)
             {
-                amount_of_cells["snake"]++;
-
                 cells_[position] = snake;
                 cells_[end_position - 1] = snake;
-
-                positions_.insert(position + 1);
 
                 count++;
             }
@@ -84,12 +80,8 @@ void Board::createLaddersCells()
 
             if (end_position <= size_ and cells_[end_position - 1] == NULL)
             {
-                amount_of_cells["ladder"]++;
-
                 cells_[position] = ladder;
                 cells_[end_position - 1] = ladder;
-
-                positions_.insert(position + 1);
 
                 count++;
             }
@@ -127,7 +119,7 @@ std::ostream &operator<<(std::ostream &output, const Board &board)
     {
         Cell *cell_actual = board.cells_[position].get();
 
-        output << cell_actual << " ";
+        output << *cell_actual << " ";
 
         if (count == 6)
         {

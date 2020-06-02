@@ -22,11 +22,11 @@ std::vector<Player *> Cell::getPlayers()
     return players_;
 }
 
-std::ostream &operator<<(std::ostream &output, Cell *cell)
+std::ostream &operator<<(std::ostream &output, Cell &cell)
 {
-    output << cell->getTypeOfCell();
+    output << cell.getTypeOfCell();
 
-    for (auto x : cell->getPlayers())
+    for (auto x : cell.getPlayers())
     {
         if (x != NULL)
         {

@@ -13,14 +13,14 @@ class Cell
 private:
     std::vector<Player *> players_;
 
+    std::vector<Player *> getPlayers();
+
 public:
     Cell(int);
 
     void addPlayerToCell(Player &player);
 
     virtual std::pair<int, int> getPositionCell() = 0;
-
-    std::vector<Player *> getPlayers();
 
     virtual void movePosition(int &position) = 0;
 
@@ -29,7 +29,7 @@ public:
     void deletePlayerFromCell(Player &player);
 
     friend std::ostream &
-    operator<<(std::ostream &output, Cell *cell);
+    operator<<(std::ostream &output, Cell &cell);
 };
 
 #endif
