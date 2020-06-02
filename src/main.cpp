@@ -87,9 +87,10 @@ void menu()
 
     std::string game_type;
 
-    std::cout << "How many tiles do you want: " << std::endl;
     int min_tiles = 12;
     int max_tiles = 100;
+
+    std::cout << "How many tiles do you want (" << min_tiles << " and " << max_tiles << "): " << std::endl;
     getNumberSizeOfVariable(game_info[0], "Size", "tiles", min_tiles, max_tiles);
 
     int min_snakes_ladders = 1;
@@ -98,27 +99,28 @@ void menu()
     int min_reward_penalty = 2;
     int max_reward_penalty = game_info[0] / 4;
 
-    std::cout << "How many snakes do you want: " << std::endl;
-
+    std::cout << "How many snakes do you want (" << min_snakes_ladders << " and " << max_snakes_ladders << "): " << std::endl;
     getNumberSizeOfVariable(game_info[1], "Number", "snakes", min_snakes_ladders, max_snakes_ladders);
 
-    std::cout << "How many ladders do you want: " << std::endl;
+    std::cout << "How many ladders do you want (" << min_snakes_ladders << " and " << max_snakes_ladders << "): " << std::endl;
     getNumberSizeOfVariable(game_info[2], "Number", "ladders", min_snakes_ladders, max_snakes_ladders);
 
-    std::cout << "How big do you want the penalty to be: " << std::endl;
+    std::cout << "How big do you want the penalty to be (" << min_reward_penalty << " and " << max_reward_penalty << "): " << std::endl;
     getNumberSizeOfVariable(game_info[3], "Size", "penalty", min_reward_penalty, max_reward_penalty);
 
-    std::cout << "How big do you want the reward to be: " << std::endl;
+    std::cout << "How big do you want the reward to be (" << min_reward_penalty << " and " << max_reward_penalty << "): " << std::endl;
     getNumberSizeOfVariable(game_info[4], "Size", "reward", min_reward_penalty, max_reward_penalty);
 
-    std::cout << "How many players are going to play: " << std::endl;
     int min_players = 2;
     int max_players = 6;
+
+    std::cout << "How many players are going to play (" << min_players << " and " << max_players << "): " << std::endl;
     getNumberSizeOfVariable(game_info[5], "Number", "players", min_players, max_players);
 
-    std::cout << "What is the limit of turns that you want: " << std::endl;
     int min_turns = 10;
     int max_turns = INT32_MAX;
+
+    std::cout << "What is the limit of turns that you want (" << min_turns << " and " << max_turns << "): " << std::endl;
     getNumberSizeOfVariable(game_info[6], "Number", "turns", min_turns, max_turns);
 
     std::cout << "Do you want the game to be automatic or manual (A or M): " << std::endl;
