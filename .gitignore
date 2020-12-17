@@ -3,5 +3,5 @@ src/main.out
 src/main
 main.out
 main
-tests.txt
-test.sh
+app
+src/*.o
